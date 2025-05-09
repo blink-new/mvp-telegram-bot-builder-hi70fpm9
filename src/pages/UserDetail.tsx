@@ -1,1 +1,135 @@
-import { Button } from \"@/components/ui/button\";\nimport { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from \"@/components/ui/card\";\nimport { Avatar, AvatarFallback, AvatarImage } from \"@/components/ui/avatar\";\nimport { Badge } from \"@/components/ui/badge\";\nimport { Tabs, TabsContent, TabsList, TabsTrigger } from \"@/components/ui/tabs\";\nimport { ScrollArea } from \"@/components/ui/scroll-area\";\nimport {\n  AlertDialog,\n  AlertDialogAction,\n  AlertDialogCancel,\n  AlertDialogContent,\n  AlertDialogDescription,\n  AlertDialogFooter,\n  AlertDialogHeader,\n  AlertDialogTitle,\n  AlertDialogTrigger\n} from \"@/components/ui/alert-dialog\";\nimport { useState } from \"react\";\n\nexport function UserDetail() {\n  const [isOpen, setIsOpen] = useState(false);\n  const [message, setMessage] = useState(\"\");\n\n  const handleSendMessage = () => {\n    // Logic to send message\n    console.log(\"Sending message:\", message);\n    setMessage(\"\");\n    setIsOpen(false);\n  };\n\n  return (\n    <div className=\"container mx-auto py-6\">\n      <Card>\n        <CardHeader className=\"flex flex-row items-center gap-4\">\n          <Avatar className=\"h-16 w-16\">\n            <AvatarImage src=\"https://github.com/shadcn.png\" alt=\"User\" />\n            <AvatarFallback>JD</AvatarFallback>\n          </Avatar>\n          <div>\n            <CardTitle>John Doe</CardTitle>\n            <CardDescription>@johndoe</CardDescription>\n            <Badge className=\"mt-1\">Active</Badge>\n          </div>\n        </CardHeader>\n        <CardContent>\n          <Tabs defaultValue=\"messages\">\n            <TabsList>\n              <TabsTrigger value=\"messages\">Messages</TabsTrigger>\n              <TabsTrigger value=\"info\">User Info</TabsTrigger>\n            </TabsList>\n            <TabsContent value=\"messages\">\n              <ScrollArea className=\"h-[300px] rounded-md border p-4\">\n                <div className=\"space-y-4\">\n                  <div className=\"flex flex-col\">\n                    <span className=\"text-sm text-muted-foreground\">Bot</span>\n                    <div className=\"rounded-lg bg-muted p-3\">\n                      Hello! How can I help you today?\n                    </div>\n                  </div>\n                  <div className=\"flex flex-col items-end\">\n                    <span className=\"text-sm text-muted-foreground\">User</span>\n                    <div className=\"rounded-lg bg-primary p-3 text-primary-foreground\">\n                      I need information about your services.\n                    </div>\n                  </div>\n                  <div className=\"flex flex-col\">\n                    <span className=\"text-sm text-muted-foreground\">Bot</span>\n                    <div className=\"rounded-lg bg-muted p-3\">\n                      Sure, we offer various services including...\n                    </div>\n                  </div>\n                </div>\n              </ScrollArea>\n            </TabsContent>\n            <TabsContent value=\"info\">\n              <div className=\"space-y-2\">\n                <div className=\"grid grid-cols-2 gap-1\">\n                  <div className=\"text-sm font-medium\">User ID:</div>\n                  <div className=\"text-sm\">12345678</div>\n                </div>\n                <div className=\"grid grid-cols-2 gap-1\">\n                  <div className=\"text-sm font-medium\">First Name:</div>\n                  <div className=\"text-sm\">John</div>\n                </div>\n                <div className=\"grid grid-cols-2 gap-1\">\n                  <div className=\"text-sm font-medium\">Last Name:</div>\n                  <div className=\"text-sm\">Doe</div>\n                </div>\n                <div className=\"grid grid-cols-2 gap-1\">\n                  <div className=\"text-sm font-medium\">Username:</div>\n                  <div className=\"text-sm\">@johndoe</div>\n                </div>\n                <div className=\"grid grid-cols-2 gap-1\">\n                  <div className=\"text-sm font-medium\">Language:</div>\n                  <div className=\"text-sm\">English</div>\n                </div>\n                <div className=\"grid grid-cols-2 gap-1\">\n                  <div className=\"text-sm font-medium\">Joined:</div>\n                  <div className=\"text-sm\">January 15, 2023</div>\n                </div>\n              </div>\n            </TabsContent>\n          </Tabs>\n        </CardContent>\n        <CardFooter>\n          <AlertDialog open={isOpen} onOpenChange={setIsOpen}>\n            <AlertDialogTrigger asChild>\n              <Button className=\"w-full\">Send Message</Button>\n            </AlertDialogTrigger>\n            <AlertDialogContent>\n              <AlertDialogHeader>\n                <AlertDialogTitle>Send Message to User</AlertDialogTitle>\n                <AlertDialogDescription>\n                  This message will be sent directly to the user via the bot.\n                </AlertDialogDescription>\n              </AlertDialogHeader>\n              <div className=\"grid gap-4 py-4\">\n                <textarea\n                  className=\"flex h-20 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50\"\n                  placeholder=\"Type your message here...\"\n                  value={message}\n                  onChange={(e) => setMessage(e.target.value)}\n                />\n              </div>\n              <AlertDialogFooter>\n                <AlertDialogCancel>Cancel</AlertDialogCancel>\n                <AlertDialogAction onClick={handleSendMessage}>Send</AlertDialogAction>\n              </AlertDialogFooter>\n            </AlertDialogContent>\n          </AlertDialog>\n        </CardFooter>\n      </Card>\n    </div>\n  );\n}\n
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger
+} from "@/components/ui/alert-dialog";
+import { useState } from "react";
+
+export function UserDetail() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleSendMessage = () => {
+    // Logic to send message
+    console.log("Sending message:", message);
+    setMessage("");
+    setIsOpen(false);
+  };
+
+  return (
+    <div className="container mx-auto py-6">
+      <Card>
+        <CardHeader className="flex flex-row items-center gap-4">
+          <Avatar className="h-16 w-16">
+            <AvatarImage src="https://github.com/shadcn.png" alt="User" />
+            <AvatarFallback>JD</AvatarFallback>
+          </Avatar>
+          <div>
+            <CardTitle>John Doe</CardTitle>
+            <CardDescription>@johndoe</CardDescription>
+            <Badge className="mt-1">Active</Badge>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <Tabs defaultValue="messages">
+            <TabsList>
+              <TabsTrigger value="messages">Messages</TabsTrigger>
+              <TabsTrigger value="info">User Info</TabsTrigger>
+            </TabsList>
+            <TabsContent value="messages">
+              <ScrollArea className="h-[300px] rounded-md border p-4">
+                <div className="space-y-4">
+                  <div className="flex flex-col">
+                    <span className="text-sm text-muted-foreground">Bot</span>
+                    <div className="rounded-lg bg-muted p-3">
+                      Hello! How can I help you today?
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-end">
+                    <span className="text-sm text-muted-foreground">User</span>
+                    <div className="rounded-lg bg-primary p-3 text-primary-foreground">
+                      I need information about your services.
+                    </div>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-sm text-muted-foreground">Bot</span>
+                    <div className="rounded-lg bg-muted p-3">
+                      Sure, we offer various services including...
+                    </div>
+                  </div>
+                </div>
+              </ScrollArea>
+            </TabsContent>
+            <TabsContent value="info">
+              <div className="space-y-2">
+                <div className="grid grid-cols-2 gap-1">
+                  <div className="text-sm font-medium">User ID:</div>
+                  <div className="text-sm">12345678</div>
+                </div>
+                <div className="grid grid-cols-2 gap-1">
+                  <div className="text-sm font-medium">First Name:</div>
+                  <div className="text-sm">John</div>
+                </div>
+                <div className="grid grid-cols-2 gap-1">
+                  <div className="text-sm font-medium">Last Name:</div>
+                  <div className="text-sm">Doe</div>
+                </div>
+                <div className="grid grid-cols-2 gap-1">
+                  <div className="text-sm font-medium">Username:</div>
+                  <div className="text-sm">@johndoe</div>
+                </div>
+                <div className="grid grid-cols-2 gap-1">
+                  <div className="text-sm font-medium">Language:</div>
+                  <div className="text-sm">English</div>
+                </div>
+                <div className="grid grid-cols-2 gap-1">
+                  <div className="text-sm font-medium">Joined:</div>
+                  <div className="text-sm">January 15, 2023</div>
+                </div>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </CardContent>
+        <CardFooter>
+          <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
+            <AlertDialogTrigger asChild>
+              <Button className="w-full">Send Message</Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Send Message to User</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This message will be sent directly to the user via the bot.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <div className="grid gap-4 py-4">
+                <textarea
+                  className="flex h-20 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  placeholder="Type your message here..."
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                />
+              </div>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={handleSendMessage}>Send</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </CardFooter>
+      </Card>
+    </div>
+  );
+}
